@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div *ngIf="(!response || !response.count) && !isLoading  ">
+        <h2 class="heading-2 text-center">
+          You do not have any orders yet !!
+        </h2>
+      </div>
+
+      <app-loader [Loading]="isLoading"></app-loader>
+
+      <div class="row mb-5" *ngFor="let result of response?.results; let i = index">
+        <div class="row order-info">
+          <div class="col-xl-8 col-12">
+            <div class="d-flex align-content-center flex-column flex-xl-row">
+              <div class="d-flex flex-xl-column flex-row justify-content-between m-3">
+                <h5 class="heading-5">
+                  Order Placed
+                </h5>
+                <p class="heading-5">{{result.created_at | date}}</p>
+              </div>
+
+              <div class="d-flex flex-xl-column flex-row justify-content-between m-3">
+                <h5 class="heading-5">
+                  Total
+                </h5>
+                <p class="heading-5">{{result.price}}</p>
+              </div>
+
+              <div class="d-flex flex-xl-column flex-row justify-content-between m-3">
+                <h5 class="heading-5">
+                  Delivered to
+                </h5>
+                <p class="heading-5">{{result.user}}</p>
+              </div>
+
+              <div class="d-flex flex-xl-column flex-row justify-content-between m-3">
+                <h5 class="heading-5">
+                  status
+                </h5>
+                <p class="heading-5">{{result.order_status}}</p>
+              </div>
+
+              <div class="d-flex flex-xl-column flex-row justify-content-between m-3">
+                <h5 class="heading-5">
+                  Addresses
+                </h5>
+                <p class="heading-5">{{result.order_address.address}}</p>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-xl-4 col-12  d-flex justify-content-xl-end justify-content-start order-xl-0 order-first ">
+            <div class="flex-column d-flex justify-content-center">
+              <h5 class="heading-5 py-4 ms-3 ">Order# {{' '+result.code}} </h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <p class="fs-5 my-3">Delivered {{' '+ (result.created_at | date) }}</p>
+          </div>
+        </div>
+
+        <div class="row my-3" *ngFor="let item of result.order_items_for_product">
+          <div class="col-12 d-flex justify-content-between">
+            <div class="d-flex justify-content-start">
+              <img [src]="baseUrl + item.product_item.main_image" [alt]="item.product_item.name" class="order-img">
+              <div class="d-flex flex-column justify-content-evenly mx-3">
+                <h5 class="heading-5 fw-bold m-0"> {{ item.product_item.name }}</h5>
+                <p class="fs-5 fw-lighter">{{ 'Quantity : '+item.quantity }}</p>
+                <p class="fs-5 fw-lighter"> {{ 'Size : '+
+                  item.product_item.size.length + '*' +
+                  item.product_item.size.height + '*' +
+                  item.product_item.size.width }}
+                </p>
+              </div>
+            </div>
+            <div class="d-flex flex-column justify-content-center">
+              <p class=" fw-bold fs-5">{{ item.price + ' LE' }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-lg-4 col-12">
+            <button class="px-5 btn btn-primary " (click)="onReorderItem(i)">Reorder Items</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+@import "variables";
+.search {
+  position: relative;
+  color: $color-grey-light;
+}
+.search-input::placeholder {
+  color: $color-grey-light;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.search-icon {
+  position: absolute;
+  display: inline;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%) scale(1.2);
+  cursor: pointer;
+}
+
+.btn-close {
+  color: $color-white;
+}

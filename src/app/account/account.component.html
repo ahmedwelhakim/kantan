@@ -1,0 +1,58 @@
+<app-header></app-header>
+<div class="container-fluid  account">
+  <div class="row pt-5">
+    <nav class=" navigate">
+      <ul class="navigate__list p-0">
+        <li class="navigate__list-item">
+          <a class="navigate__link" routerLink="/">Home &nbsp; </a>
+          <a class="navigate__link" routerLink="/account">Account &nbsp;</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="row">
+    <nav class="account-nav col-xxl-2 col-xl-3 col-md-4 col-12 text-center text-md-start">
+      <ul class="account-nav__list d-flex flex-column p-0">
+        <li class="account-nav__list-item" routerLinkActive="account-nav__list-item--active">
+          <a class="account-nav__link" routerLink="orders">
+            <h5 class="heading-5">
+              My orders
+            </h5>
+            <p class="m-0 account-nav__description">return,or buy things again.</p>
+          </a>
+        </li>
+        <li class="account-nav__list-item" routerLinkActive="account-nav__list-item--active">
+          <a class="account-nav__link" routerLink="login-sec">
+            <h5 class="heading-5">
+              Login & security
+            </h5>
+            <p class="m-0 account-nav__description">Edit name,mobile number.</p>
+
+          </a>
+        </li>
+        <li class="account-nav__list-item" routerLinkActive="account-nav__list-item--active">
+          <a class="account-nav__link" routerLink="addresses">
+
+            <h5 class="heading-5">
+              Your Addresses
+            </h5>
+            <p class="m-0 account-nav__description">Edit addresses for orders.</p>
+          </a>
+        </li>
+        <li class="account-nav__list-item">
+          <a class="account-nav__link" routerLink="/" (click)="onLogout()">
+
+            <h5 class="heading-5">
+              Logout
+            </h5>
+
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="col-xxl-10 col-xl-9 col-md-8  col-12">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

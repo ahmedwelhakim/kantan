@@ -1,0 +1,62 @@
+.form-control {
+  border-color: $color-primary;
+  font-weight: 600;
+}
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border-color: red;
+}
+input {
+  min-height: 2.8rem;
+}
+
+.nav-link {
+  cursor: pointer !important;
+}
+.btn {
+  width: auto;
+  @include paddingX(1rem);
+  @include media-breakpoint-down(md) {
+    width: 100%;
+  }
+}
+
+.navigate {
+  &__list {
+    list-style: none;
+  }
+
+  &__link {
+    position: relative;
+    &:not(:first-child) {
+      padding: 1rem;
+    }
+    padding-right: 1rem;
+    cursor: pointer;
+    &:not(:last-child) {
+      &::after {
+        content: ">";
+        position: absolute;
+        right: 0;
+      }
+    }
+    text-decoration: none;
+  }
+}
+
+ul {
+  list-style: none;
+}
+li {
+  text-decoration: none !important;
+}
+.container-fluid {
+  @include paddingX(5.729vw !important);
+}
+
+.offcanvas {
+  width: 100% !important;
+  color: $color-white;
+  background-color: $color-primary;
+}

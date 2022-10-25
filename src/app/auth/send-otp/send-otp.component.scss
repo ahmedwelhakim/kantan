@@ -1,0 +1,22 @@
+@import "variables";
+
+.otp-input,
+.otp-input:focus {
+  text-align: center;
+  display: inline-block;
+  width: 22%;
+  border: none;
+  margin-right: 1rem;
+  border-bottom: 1px solid $color-primary;
+  background-color: transparent;
+  outline: none;
+  font-family: inherit;
+  font-weight: 500;
+  padding: 1rem;
+  font-size: 1.25rem;
+}
+
+.link {
+  text-decoration: underline;
+  cursor: pointer;
+}

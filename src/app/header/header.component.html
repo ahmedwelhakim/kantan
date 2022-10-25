@@ -1,0 +1,74 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-4">
+    <div class="px-6 container-fluid  justify-content-between align-items-center">
+
+      <div class="d-flex">
+        <a class="navbar-brand me-5" routerLink="/"><img src="assets/imgs/Group 1.svg" alt="Logo"></a>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="width:300px">
+            <li class="nav-item">
+              <a class="nav-link fs-5" routerLink="/contact-us" routerLinkActive="active"
+                aria-current="page">Contact</a>
+            </li>
+            <li class="nav-item" *ngIf="user">
+              <a class="nav-link fs-5" routerLink="/account" routerLinkActive="active" aria-current="page">account</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="d-flex w-25">
+        <div class=" search collapse navbar-collapse">
+          <input class="form-control me-2 px-4 py-3 rounded-pill search-input" type="search" placeholder="search..."
+            aria-label="Search">
+          <span class="search-icon">
+            <svg-icon src="assets/imgs/search.svg" [applyClass]="true">
+            </svg-icon>
+          </span>
+        </div>
+
+      </div>
+
+      <ul class="d-flex text-white align-content-center m-0" *ngIf="!user else elseContent">
+        <li class="d-flex flex-column justify-content-center">
+          <a routerLink="/auth/log-in" class="text-white me-4 fs-5 text-decoration-none">Log in</a>
+        </li>
+        <li class="d-flex flex-column justify-content-center">
+          <a routerLink="/auth/sign-up" class="fs-5 fw-bold text-decoration-none btn btn-light">Sign up</a>
+        </li>
+      </ul>
+
+      <ng-template #elseContent>
+        <div>&nbsp;</div>
+      </ng-template>
+      <a class="navbar-toggler" (click)="open(content)" aria-controls="collapseExample">
+        <span class="navbar-toggler-icon"></span>
+      </a>
+
+    </div>
+  </nav>
+</header>
+
+<ng-template #content let-offcanvas class="offcanvas">
+  <div class="offcanvas-header">
+
+
+    <svg-icon src="assets/imgs/close.svg" (click)="offcanvas.dismiss('Cross click')" [applyClass]="true"
+      style="color: white; padding-left: 1rem; padding-top: 0.5rem;"></svg-icon>
+  </div>
+  <div class="offcanvas-body text-center ">
+    <div class="d-flex flex-column">
+
+    </div>
+    <ul class="navbar-nav d-flex flex-column">
+      <li class="nav-item ">
+        <a class="nav-link fs-4" routerLink="/contact-us" routerLinkActive="active" aria-current="page"
+          (click)="offcanvas.dismiss('Cross click')">Contact</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link fs-4" routerLink="/account" routerLinkActive="active" aria-current="page"
+          (click)="offcanvas.dismiss('Cross click')">account</a>
+      </li>
+    </ul>
+
+  </div>
+</ng-template>

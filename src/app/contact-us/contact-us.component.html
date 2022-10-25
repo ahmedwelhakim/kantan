@@ -1,0 +1,132 @@
+<app-header></app-header>
+<div class="container-fluid contact-us">
+  <div class="row pt-5">
+    <nav class=" navigate">
+      <ul class="navigate__list p-0">
+        <li class="navigate__list-item">
+          <a class="navigate__link" routerLink="/">Home &nbsp; </a>
+          <a class="navigate__link" routerLink="/contact-us">Contact Us &nbsp;</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-5  justify-content-center">
+      <h2 class="heading-2 mb-3">Leave us a message</h2>
+      <form (ngSubmit)="onSubmit()" [formGroup]="form">
+
+        <div class="form-group mb-4">
+          <label for="name">Name:</label>
+          <input type="text" id="name" class="form-control" name="name" formControlName="name">
+          <p *ngIf="!form.get('name')?.valid && form.get('name')?.touched && !form.get('name')?.value "
+            class="text-danger"> Name is Required</p>
+          <p *ngIf="!form.get('name')?.valid && form.get('name')?.touched && form.get('name')?.value "
+            class="text-danger">
+            Name is invalid
+          </p>
+        </div>
+
+        <div class="form-group mb-4">
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" class="form-control" name="email" formControlName="email">
+          <p *ngIf="!form.get('email')?.valid && form.get('email')?.touched && !form.get('email')?.value "
+            class="text-danger"> Email is Required</p>
+          <p *ngIf="!form.get('email')?.valid && form.get('email')?.touched && form.get('email')?.value "
+            class="text-danger">
+            Email is invalid
+          </p>
+        </div>
+
+        <div class="form-group mb-4">
+          <label for="phone">Phone number:</label>
+          <input type="tel" id="phone" class="form-control" name="phone" formControlName="phone">
+          <p *ngIf="!form.get('phone')?.valid && form.get('phone')?.touched && !form.get('phone')?.value "
+            class="text-danger"> Phone is Required</p>
+          <p *ngIf="!form.get('phone')?.valid && form.get('phone')?.touched && form.get('phone')?.value "
+            class="text-danger">
+            Phone is invalid
+          </p>
+        </div>
+
+        <div class="form-group mb-4">
+          <label for="subject">Subject:</label>
+          <input type="text" id="subject" class="form-control" name="subject" formControlName="subject">
+          <p *ngIf="!form.get('subject')?.valid && form.get('subject')?.touched && !form.get('subject')?.value "
+            class="text-danger"> Subject is Required</p>
+          <p *ngIf="!form.get('subject')?.valid && form.get('subject')?.touched && form.get('subject')?.value "
+            class="text-danger">
+            Subject is invalid
+          </p>
+        </div>
+
+
+        <div class="form-group mb-4">
+          <label for="subject">Your message:</label>
+          <textarea id="message" class="form-control" name="message" formControlName="message"></textarea>
+          <p *ngIf="!form.get('message')?.valid && form.get('message')?.touched && !form.get('message')?.value "
+            class="text-danger"> Message is Required</p>
+          <p *ngIf="!form.get('message')?.valid && form.get('message')?.touched && form.get('message')?.value "
+            class="text-danger">
+            Message is invalid
+          </p>
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-primary px-5 contact-us__btn" type="submit" [disabled]="!form.valid">send</button>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="col-12  col-lg-6 offset-1 ">
+      <h3 class="heading-4  mb-5">
+        store location:
+      </h3>
+      <div class="map mb-5">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d37440.82340784714!2d39.26448540082242!3d21.405622869936582!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15c3cbcf67980529%3A0x5db8b123e05429e0!2sMiddle%20East%20Mattress%20Factory%20Co.%20Sealy!5e0!3m2!1sen!2seg!4v1655208073963!5m2!1sen!2seg"
+          width="100%" height="100%" style="border:0;" allowfullscreen="true"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="response !== null">
+    <div class="col">
+      <h2 class="heading-2  mb-3">
+        {{ response.title2 }}
+      </h2>
+      <div class="row justify-content-center">
+        <div class="support row">
+          <div class="col-md-4 col-12 mb-4 text-center support__item    ">
+            <svg-icon src="{{apiUrl+response.location_icon}}" [svgStyle]="{ 'height.px':49 }" [applyClass]="true"
+              class="d-block m-auto mb-4">
+            </svg-icon>
+            <h3 class="heading-3">
+              {{ response.location_title }}
+            </h3>
+            <p> {{ response.location }}</p>
+          </div>
+          <div class="col-md-4 col-12 mb-4 text-center support__item   ">
+            <svg-icon src="{{apiUrl+response.call_icon}}" [svgStyle]="{ 'height.px':49 }" [applyClass]="true"
+              class="d-block m-auto mb-4">
+            </svg-icon>
+            <h3 class="heading-3">
+              {{ response.call_title }}
+            </h3>
+            <p> {{ response.call }}</p>
+          </div>
+          <div class="col-md-4 col-12 mb-4 text-center support__item   ">
+            <svg-icon src="{{apiUrl+response.email_icon}}" [svgStyle]="{ 'height.px':49 }" [applyClass]="true"
+              class="d-block m-auto mb-4">
+            </svg-icon>
+            <h3 class="heading-3">
+              {{ response.email_title }}
+            </h3>
+            <p> {{ response.email }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,64 @@
+<section class="container-fluid">
+  <ngb-toast *ngIf="!toastHidden" style="position: fixed; top:1rem;" [autohide]="true" [delay]="2000">
+    {{toastMessage}}
+  </ngb-toast>
+
+  <div class="row ">
+    <div class="col justify-content-start">
+
+
+      <app-loader [Loading]="isLoading" class="col-xxl-6 col-12 "></app-loader>
+
+      <form (ngSubmit)="onSubmit()" [formGroup]="form" *ngIf="response">
+
+        <div class="col-xxl-6 col-12">
+          <label for="name">Name:</label>
+          <input type="text" id="name" class="form-control " name="name" formControlName="name">
+          <span *ngIf="form.get('name')?.invalid && form.get('name')?.touched " class=" text-danger p-0 m-0 fw-bold ">
+            {{ !form.get('name')?.value ?
+            'Name is Required' : '' }}
+          </span>
+          <span *ngIf=" form.get('name')?.valid || form.get('name')?.untouched " class=" text-danger p-0 m-0 fw-bold ">
+            &nbsp;
+          </span>
+        </div>
+
+        <div class="col-xxl-6 col-12">
+          <label for="phone">Phone Number:</label>
+          <input type="tel" id="phone" class="form-control" name="phone" formControlName="phone">
+          <span *ngIf="form.get('phone')?.invalid && form.get('phone')?.touched  "
+            class=" text-danger p-0 m-0 fw-bold ">
+            {{ !form.get('phone')?.value ?
+            'Phone is Required' : 'Phone is invalid' }}
+          </span>
+          <span *ngIf=" form.get('phone')?.valid || form.get('phone')?.untouched "
+            class=" text-danger p-0 m-0 fw-bold ">
+            &nbsp;
+          </span>
+        </div>
+
+
+        <div class="col-xxl-6 col-12">
+          <label for="email">E-Mail(Optional):</label>
+          <input type="email" id="email" class="form-control" name="email" formControlName="email">
+          <span *ngIf="form.get('email')?.invalid && form.get('email')?.touched  "
+            class=" text-danger p-0 m-0 fw-bold ">
+            {{ 'Email is invalid' }}
+          </span>
+          <span *ngIf=" form.get('phone')?.valid || form.get('phone')?.untouched "
+            class=" text-danger p-0 m-0 fw-bold ">
+            &nbsp;
+          </span>
+          <div class="form-group mt-4 text-center ">
+            <button class="btn btn-primary px-5 contact-us__btn" type="submit" [disabled]="!form.valid">
+              Save Changes
+            </button>
+          </div>
+        </div>
+
+
+
+      </form>
+    </div>
+  </div>
+</section>

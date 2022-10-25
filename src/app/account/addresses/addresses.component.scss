@@ -1,0 +1,33 @@
+@import "variables";
+@import "mixins";
+.address {
+  &__container {
+    border: 1px solid $color-grey-light;
+    padding: 1.3rem;
+    max-width: 50rem;
+    border-radius: 0.3rem;
+  }
+  &__heading {
+    display: inline-block;
+    color: $color-grey;
+  }
+  &__value {
+    margin-left: 1rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+  &__default-btn {
+    border: none;
+    background-color: rgba($color-grey-light, 0.1);
+    font-size: 0.8rem;
+    color: $color-grey-light;
+    @include paddingX(1.3rem);
+    @include paddingY(0.5rem);
+    border-radius: 0.3rem;
+  }
+}
+
+.modal-header,
+.modal-footer {
+  border: none;
+}

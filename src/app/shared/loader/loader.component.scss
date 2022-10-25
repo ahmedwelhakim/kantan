@@ -1,0 +1,52 @@
+@import "variables";
+.loader {
+  position: relative;
+  display: inline-block;
+  width: 100px;
+  text-align: center;
+  height: 40px;
+  background-repeat: no-repeat;
+  transform: scaleX(0.6);
+  background-image: linear-gradient($color-primary 40px, transparent 0),
+    linear-gradient($color-primary 40px, transparent 0),
+    linear-gradient($color-primary 40px, transparent 0),
+    linear-gradient($color-primary 40px, transparent 0),
+    linear-gradient($color-primary 40px, transparent 0),
+    linear-gradient($color-primary 40px, transparent 0);
+  background-position: 0px center, 15px center, 30px center, 45px center,
+    60px center, 75px center, 90px center;
+  animation: rikSpikeRoll 1.2s cubic-bezier(0.32, 0.68, 0.25, 0.9) infinite;
+}
+@keyframes rikSpikeRoll {
+  0% {
+    background-size: 15px 15px;
+  }
+  8% {
+    background-size: 15px 40px, 15px 15px, 15px 15px, 15px 15px, 15px 15px,
+      15px 15px;
+  }
+  16% {
+    background-size: 15px 30px, 15px 40px, 15px 15px, 15px 15px, 15px 15px,
+      15px 15px;
+  }
+  24% {
+    background-size: 15px 15px, 15px 30px, 15px 40px, 15px 15px, 15px 15px,
+      15px 15px;
+  }
+  32% {
+    background-size: 15px 15px, 15px 15px, 15px 30px, 15px 40px, 15px 15px,
+      15px 15px;
+  }
+  40% {
+    background-size: 15px 15px, 15px 15px, 15px 15px, 15px 30px, 15px 40px,
+      15px 15px;
+  }
+  48% {
+    background-size: 15px 15px, 15px 15px, 15px 15px, 15px 15px, 15px 30px,
+      15px 40px;
+  }
+  50%,
+  100% {
+    background-size: 15px 15px;
+  }
+}

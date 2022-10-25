@@ -1,0 +1,188 @@
+<div class="container-fluid">
+  <div class="row" *ngIf="isLoading">
+    <app-loader [Loading]="isLoading" class="col-8"></app-loader>
+  </div>
+  <div class="row" *ngFor="let address of addresses">
+    <div class="col">
+      <div class="address__container mb-3">
+        <button *ngIf="address.is_default" class="address__default-btn mb-4">Default address</button>
+
+        <div class="d-flex justify-content-between ">
+          <div class="address__field">
+            <h5 class="address__heading "> Name: </h5>
+            <span class="address__value">{{address.name}}</span>
+          </div>
+          <div class="address__edits">
+            <img src="assets/imgs/delete.svg" alt="delete icon" (click)="onDelete(address)" class="me-3 link">
+            <img src="assets/imgs/edit2.svg" alt="edit icon" (click)="onEdit(address)" class="link">
+          </div>
+        </div>
+
+        <div class="address__field">
+          <h5 class="address__heading "> Address: </h5>
+          <span class="address__value">{{address.address}}</span>
+        </div>
+        <div class="address__field">
+
+          <h5 class="address__heading "> City: </h5>
+          <span class="address__value">{{address.city}}</span>
+        </div>
+        <div class="address__field">
+          <h5 class="address__heading "> Phone: </h5>
+          <span class="address__value">{{address.phone}}</span>
+        </div>
+        <div class="text-end">
+          <button *ngIf="!address.is_default" (click)="onSetDefault(address)" class="btn btn-primary mt-2 mb-4">Set
+            Default
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <a class="link fs-5 mt-2" (click)="onCreateAddress()">Add new address</a>
+    </div>
+  </div>
+</div>
+
+
+
+<!--
+-----------------------------------------------------
+Modal
+----------------------------------------------------- -->
+
+<ng-template #modal let-modal>
+  <div class="modal-header px-6 pb-0 pt-5 ">
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body  mt-5  px-6 pb-5">
+    <div class="row mb-3">
+      <div class="col-12">
+        <h4 class="modal-title" id="modal-basic-title">Add address</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 ">
+        <form (ngSubmit)="onSubmitAddress()" [formGroup]="form">
+          <div class="row">
+            <div class="col-lg-6 col-12">
+              <label for="name">Name:</label>
+              <input type="text" id="name" class="form-control " name="name" formControlName="name">
+              <span *ngIf="form.get('name')?.invalid && form.get('name')?.touched; else elseTemp  "
+                class=" text-danger p-0 m-0 fw-bold ">
+                {{ !form.get('name')?.value ?
+                'Name is Required' : '' }}
+              </span>
+              <ng-template #elseTemp>
+                &nbsp;
+              </ng-template>
+            </div>
+            <div class="col-lg-6 col-12">
+              <label for="email">E-Mail(Optional):</label>
+              <input type="email" id="email" class="form-control" name="email" formControlName="email">
+              <span *ngIf="form.get('email')?.invalid && form.get('email')?.touched ; else elseTemp "
+                class=" text-danger p-0 m-0 fw-bold ">
+                Email is invalid
+              </span>
+              <ng-template #elseTemp>
+                &nbsp;
+              </ng-template>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-6 col-12">
+              <label for="city">City:</label>
+              <input type="text" id="city" class="form-control " city="city" formControlName="city">
+              <span *ngIf="form.get('city')?.invalid && form.get('city')?.touched; else elseTemp  "
+                class=" text-danger p-0 m-0 fw-bold ">
+                {{ !form.get('city')?.value ?
+                'city is Required' : '' }}
+              </span>
+              <ng-template #elseTemp>
+                &nbsp;
+              </ng-template>
+            </div>
+            <div class="col-lg-6 col-12">
+              <label for="phone">Phone number:</label>
+              <input type="phone" id="phone" class="form-control" name="phone" formControlName="phone">
+              <span *ngIf="form.get('phone')?.invalid && form.get('phone')?.touched ; else elseTemp "
+                class=" text-danger p-0 m-0 fw-bold ">
+                phone is invalid
+              </span>
+              <ng-template #elseTemp>
+                &nbsp;
+              </ng-template>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <label for="address">address:</label>
+              <input type="text" id="address" class="form-control " address="address" formControlName="address">
+              <span *ngIf="form.get('address')?.invalid && form.get('address')?.touched; else elseTemp  "
+                class=" text-danger p-0 m-0 fw-bold ">
+                {{ !form.get('address')?.value ?
+                'address is Required' : '' }}
+              </span>
+              <ng-template #elseTemp>
+                &nbsp;
+              </ng-template>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-4 col-12">
+              <label for="building">building:</label>
+              <input type="text" id="building" class="form-control " building="building" formControlName="building">
+              <span *ngIf="form.get('building')?.invalid && form.get('building')?.touched; else elseTemp  "
+                class=" text-danger p-0 m-0 fw-bold ">
+                {{ !form.get('building')?.value ?
+                'building is Required' : '' }}
+              </span>
+              <ng-template #elseTemp>
+                &nbsp;
+              </ng-template>
+            </div>
+            <div class="col-lg-4 col-12">
+              <label for="floor">floor:</label>
+              <input type="floor" id="floor" class="form-control" name="floor" formControlName="floor">
+              <span *ngIf="form.get('floor')?.invalid && form.get('floor')?.touched ; else elseTemp "
+                class=" text-danger p-0 m-0 fw-bold ">
+                floor is invalid
+              </span>
+              <ng-template #elseTemp>
+                &nbsp;
+              </ng-template>
+            </div>
+            <div class="col-lg-4 col-12">
+              <label for="apartment">apartment number:</label>
+              <input type="apartment" id="apartment" class="form-control" name="apartment" formControlName="apartment">
+              <span *ngIf="form.get('apartment')?.invalid && form.get('apartment')?.touched ; else elseTemp "
+                class=" text-danger p-0 m-0 fw-bold ">
+                apartment is invalid
+              </span>
+              <ng-template #elseTemp>
+                &nbsp;
+              </ng-template>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 text-center ">
+              <button class="btn btn-primary px-5 my-5" type="submit" [disabled]="!form.valid">
+                Save Changes
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+</ng-template>

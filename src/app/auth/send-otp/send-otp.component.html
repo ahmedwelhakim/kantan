@@ -1,0 +1,50 @@
+<div class=" auth">
+  <div class="row">
+    <div class="col-md-6 col-12 d-flex flex-column justify-content-center p-5 h--100vh ">
+      <h1 class=" heading-1 mb-5 text-center">
+        Enter Code
+      </h1>
+      <form (ngSubmit)="onSubmit()" [formGroup]="form">
+
+        <div class="row justify-content-center mb-1">
+          <div class="col-xxl-8 col-md-10 col-sm-8 col-12">
+            <div class="d-flex  " #otp>
+              <input type="text" id="otp1" class="form-control" name="otp1" maxlength="1" formControlName="otp1"
+                class="otp-input" (keyup)="onDigitInput($event)">
+              <input type=" text" id="otp2" class="form-control" name="otp2" maxlength="1" formControlName="otp2"
+                class="otp-input" (keyup)="onDigitInput($event)">
+              <input type=" text" id="otp3" class="form-control" name="otp3" maxlength="1" formControlName="otp3"
+                class="otp-input" (keyup)="onDigitInput($event)">
+              <input type=" text" id="otp4" class="form-control" name="otp4" maxlength="1" formControlName="otp4"
+                class="otp-input" (keyup)="onDigitInput($event)">
+              <span *ngIf=" response " class=" text-danger p-0 m-0 fw-bold ">
+                {{ response.detail }}
+              </span>
+            </div>
+            <span *ngIf=" !response " class=" text-danger p-0 m-0 fw-bold ">
+              &nbsp;
+            </span>
+          </div>
+        </div>
+        <div class="row justify-content-center mb-1">
+          <div class="col-xxl-8 col-md-10 col-sm-8 col-12 text-center">
+            <button class="btn btn-primary px-5 contact-us__btn mb-3" type="submit" [disabled]="!form.valid">Send
+              Code
+            </button>
+            <span class="text-center mb-3 d-block">{{ time }}</span>
+            <a *ngIf="time === 0" (click)="onResend()" class="link ">Resend</a>
+          </div>
+        </div>
+      </form>
+
+
+    </div>
+    <div class="col-md-6 col-12 bg-img text-white text-center flex-column justify-content-center d-none d-md-flex ">
+      <h1 class="heading-1">
+        Reset Password
+      </h1>
+      <p class="fs-4 m-0"> Lorem ipsum Lorem </p>
+      <p class="fs-4 m-0"> Lorem ipsum Lorem </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+@import "variables";
+@import "mixins";
+
+label {
+  font-size: 1.125rem;
+  margin-bottom: 0.625rem;
+}
+.contact-us {
+  background-color: $color-bg;
+  padding: 0 6.5rem;
+  &__btn {
+    @include media-breakpoint-down(sm) {
+      width: 100%;
+    }
+  }
+  @include media-breakpoint-down(md) {
+    padding: 4rem;
+  }
+  @include media-breakpoint-down(sm) {
+    padding: 2rem;
+  }
+  font-weight: 500;
+}
+
+.map {
+  height: 35.3125rem;
+  max-width: 53rem;
+}
+
+.support {
+  height: 13.75rem;
+  max-width: 75%;
+  &__item {
+    &:not(:last-child) {
+      border-right: 1px solid $color-primary;
+      @include media-breakpoint-down(md) {
+        border-right: none;
+      }
+    }
+  }
+  &__link {
+    text-decoration: none;
+    font-size: 1.5625rem;
+  }
+  &__icon {
+    fill: red;
+  }
+}
