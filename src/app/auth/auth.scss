@@ -1,6 +1,9 @@
 @import "variables";
+@import "mixins";
 .bg-img {
+  background-size: cover;
   height: 100vh;
+  width: 50%;
   background-image: url("../../assets/imgs/Group 991.jpg");
 }
 

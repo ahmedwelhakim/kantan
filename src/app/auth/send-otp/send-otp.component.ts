@@ -20,6 +20,7 @@ export class SendOtpComponent implements OnInit {
   form!: FormGroup;
   response: { detail: string } | null = null;
   timerInterval: any;
+  errorMessage = '';
 
   ngOnInit(): void {
     this.initForm();
@@ -61,7 +62,7 @@ export class SendOtpComponent implements OnInit {
       )
       .subscribe({
         error: (err: HttpErrorResponse) => {
-          console.log(err);
+          this.errorMessage = err.message;
         },
         next: (res) =>
           this.router.navigate(['../log-in'], { relativeTo: this.route }),
@@ -72,7 +73,7 @@ export class SendOtpComponent implements OnInit {
     this.resetTime();
     this.authService.resendOtp().subscribe({
       error: (err: HttpErrorResponse) => {
-        console.log(err);
+        this.errorMessage = err.message;
       },
       next: (res) => console.log(res),
     });

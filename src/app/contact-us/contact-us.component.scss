@@ -24,11 +24,10 @@ label {
 
 .map {
   height: 35.3125rem;
-  max-width: 53rem;
 }
 
 .support {
-  height: 13.75rem;
+  //height: 13.75rem;
   max-width: 75%;
   &__item {
     &:not(:last-child) {

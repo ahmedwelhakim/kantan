@@ -47,4 +47,12 @@ export class CustomValidators {
         : null;
     };
   }
+
+  static isMatch(passwordControlName: string): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: boolean } | null => {
+      return control.parent?.get(passwordControlName)?.value !== control?.value
+        ? { isMatch: true }
+        : null;
+    };
+  }
 }

@@ -13,7 +13,7 @@ export class ForgetPasswordComponent implements OnInit {
   time!: number;
   constructor(private authService: AuthService) {}
   form!: FormGroup;
-
+  errorMessage = '';
   ngOnInit(): void {
     this.initForm();
   }
@@ -31,7 +31,7 @@ export class ForgetPasswordComponent implements OnInit {
     if (!this.form.valid) return;
     this.authService.forgetPassword(this.form.value).subscribe({
       error: (err: HttpErrorResponse) => {
-        console.log(err);
+        this.errorMessage = err.message;
       },
       next: (res) => console.log(res),
     });

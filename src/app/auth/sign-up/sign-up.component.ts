@@ -14,13 +14,14 @@ import { AuthService } from './../auth.service';
 export class SignUpComponent implements OnInit {
   url: string;
   apiUrl: string;
+  errorMessage = '';
   constructor(
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute
   ) {
     this.apiUrl = environment.apiUrl;
-    this.url = environment.apiUrl + '/api/user/auth/register/';
+    this.url = '/api/user/auth/register/';
   }
   form!: FormGroup;
 
@@ -46,7 +47,7 @@ export class SignUpComponent implements OnInit {
     if (!this.form.valid) return;
     this.authService.signUp(this.form.value).subscribe({
       error: (err: HttpErrorResponse) => {
-        console.log(err);
+        this.errorMessage = err.message;
       },
       next: (res) =>
         this.router.navigate(['../send-otp'], { relativeTo: this.route }),

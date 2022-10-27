@@ -25,6 +25,7 @@ export class AuthService {
 
   user = new BehaviorSubject<User | null>(null);
   signUp(data: SignUpReq) {
+    if (!data.email) data.email = null;
     this.localStorageService.setItem(LocalStorageKeys.phone, {
       phone: data.phone,
     });

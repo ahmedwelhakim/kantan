@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, tap } from 'rxjs';
 import { CustomValidators } from 'src/app/shared/custom-validators.service';
 import { HttpService } from 'src/app/shared/http.service';
-import { environment } from 'src/environments/environment';
 import { Address } from '../address.model';
 
 @Injectable({
@@ -13,7 +12,7 @@ export class AddressService {
   addressForm!: FormGroup;
   addresses$ = new BehaviorSubject<Address[]>([]);
   private addressesArr: Address[] = [];
-  url = environment.apiUrl + '/api/user-address/';
+  url = '/api/user-address/';
   constructor(private httpService: HttpService) {
     this.initAddressForm();
   }
@@ -43,6 +42,8 @@ export class AddressService {
   }
 
   deleteAddress(address: Address) {
+    this.addressesArr = this.addressesArr.filter((v) => v.id !== address.id);
+    this.addresses$.next(this.addressesArr);
     return this.httpService.deleteData(this.url + address.id);
   }
 

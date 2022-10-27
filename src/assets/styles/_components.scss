@@ -51,8 +51,15 @@ ul {
 li {
   text-decoration: none !important;
 }
+a {
+  cursor: pointer;
+}
+.container-fluid-no-padding {
+  @extend .container-fluid;
+  @include paddingX(calc(var(--bs-gutter-x) * 0.5) !important);
+}
 .container-fluid {
-  @include paddingX(5.729vw !important);
+  @include paddingX(5.729vw);
 }
 
 .offcanvas {

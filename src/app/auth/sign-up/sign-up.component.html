@@ -1,4 +1,4 @@
-<div class="auth">
+<div class="container-fluid-no-padding">
   <div class="row">
     <div class="col-md-6 col-12 bg-img text-center d-none d-md-flex flex-column justify-content-center">
       <h1 class="heading-1 text-white">
@@ -66,7 +66,7 @@
         </div>
 
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mb-3">
           <div class="col-xxl-8 col-md-10 col-sm-8 col-12">
             <label for="password">Password:</label>
             <input type="password" id="password" class="form-control" name="password" formControlName="password">
@@ -79,7 +79,7 @@
               class=" text-danger p-0 m-0 fw-bold ">
               &nbsp;
             </span>
-
+            <app-error [message]="errorMessage"></app-error>
           </div>
         </div>
         <div class="row justify-content-center">

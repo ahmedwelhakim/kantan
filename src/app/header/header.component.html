@@ -3,9 +3,9 @@
     <div class="px-6 container-fluid  justify-content-between align-items-center">
 
       <div class="d-flex">
-        <a class="navbar-brand me-5" routerLink="/"><img src="assets/imgs/Group 1.svg" alt="Logo"></a>
+        <a class="navbar-brand me-5" routerLink="/"><img src="assets/imgs/Group 1.svg" class="logo-img" alt="Logo"></a>
         <div class="collapse navbar-collapse">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="width:300px">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 " style="width:300px">
             <li class="nav-item">
               <a class="nav-link fs-5" routerLink="/contact-us" routerLinkActive="active"
                 aria-current="page">Contact</a>
@@ -27,17 +27,18 @@
         </div>
 
       </div>
+      <div class="div collapse navbar-collapse justify-content-end">
+        <ul class="d-flex text-white align-content-center m-0 " *ngIf="!user else empty">
+          <li class="d-flex flex-column justify-content-center">
+            <a routerLink="/auth/log-in" class="text-white me-4 fs-5 text-decoration-none">Log in</a>
+          </li>
+          <li class="d-flex flex-column justify-content-center">
+            <a routerLink="/auth/sign-up" class="fs-5 fw-bold text-decoration-none btn btn-light">Sign up</a>
+          </li>
+        </ul>
+      </div>
 
-      <ul class="d-flex text-white align-content-center m-0" *ngIf="!user else elseContent">
-        <li class="d-flex flex-column justify-content-center">
-          <a routerLink="/auth/log-in" class="text-white me-4 fs-5 text-decoration-none">Log in</a>
-        </li>
-        <li class="d-flex flex-column justify-content-center">
-          <a routerLink="/auth/sign-up" class="fs-5 fw-bold text-decoration-none btn btn-light">Sign up</a>
-        </li>
-      </ul>
-
-      <ng-template #elseContent>
+      <ng-template #empty>
         <div>&nbsp;</div>
       </ng-template>
       <a class="navbar-toggler" (click)="open(content)" aria-controls="collapseExample">
@@ -62,12 +63,29 @@
     <ul class="navbar-nav d-flex flex-column">
       <li class="nav-item ">
         <a class="nav-link fs-4" routerLink="/contact-us" routerLinkActive="active" aria-current="page"
-          (click)="offcanvas.dismiss('Cross click')">Contact</a>
+          (click)="offcanvas.dismiss()">Contact</a>
       </li>
       <li class="nav-item">
         <a class="nav-link fs-4" routerLink="/account" routerLinkActive="active" aria-current="page"
-          (click)="offcanvas.dismiss('Cross click')">account</a>
+          (click)="offcanvas.dismiss()">account</a>
       </li>
+      <ng-container *ngIf="!user else loggedIn">
+        <li class="nav-item ">
+          <a routerLink="/auth/log-in" class="text-white fs-4 nav-link" (click)="offcanvas.dismiss()">
+            Log in
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a routerLink="/auth/sign-up" class="fs-5 fw-bold  btn btn-light " (click)="offcanvas.dismiss()">
+            Sign up
+          </a>
+        </li>
+      </ng-container>
+      <ng-template #loggedIn>
+        <li class="nav-item">
+          <a class="nav-link fs-4" aria-current="page" (click)="onLogout()">log out</a>
+        </li>
+      </ng-template>
     </ul>
 
   </div>

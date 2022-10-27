@@ -10,7 +10,7 @@ import { OrdersResponse } from './orders.model';
 })
 export class OrdersComponent implements OnInit {
   constructor(private httpService: HttpService) {}
-  url = environment.apiUrl + '/api/order/';
+  url = '/api/order/';
   response: OrdersResponse | null = null;
   isLoading = false;
   baseUrl = environment.apiUrl;

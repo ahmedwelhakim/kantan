@@ -1,0 +1,4 @@
+<div class="error fw-bold mb-3" *ngIf="message else empty ">{{message}}</div>
+<ng-template #empty>
+  <div>&nbsp;</div>
+</ng-template>

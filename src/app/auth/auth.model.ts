@@ -4,7 +4,7 @@ export interface SignUpReq {
   phone: string;
   name: string;
   password: string;
-  email: string;
+  email: string | null;
 }
 
 export interface OtpSend {

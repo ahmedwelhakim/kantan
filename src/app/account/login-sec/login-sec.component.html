@@ -1,24 +1,23 @@
 <section class="container-fluid">
-  <ngb-toast *ngIf="!toastHidden" style="position: fixed; top:1rem;" [autohide]="true" [delay]="2000">
-    {{toastMessage}}
-  </ngb-toast>
-
+  <app-toast [(message)]="toastMessage"></app-toast>
   <div class="row ">
     <div class="col justify-content-start">
 
 
       <app-loader [Loading]="isLoading" class="col-xxl-6 col-12 "></app-loader>
 
-      <form (ngSubmit)="onSubmit()" [formGroup]="form" *ngIf="response">
+      <form (ngSubmit)="onSubmit()" [formGroup]="generalForm" *ngIf="response">
 
         <div class="col-xxl-6 col-12">
           <label for="name">Name:</label>
           <input type="text" id="name" class="form-control " name="name" formControlName="name">
-          <span *ngIf="form.get('name')?.invalid && form.get('name')?.touched " class=" text-danger p-0 m-0 fw-bold ">
-            {{ !form.get('name')?.value ?
+          <span *ngIf="generalForm.get('name')?.invalid && generalForm.get('name')?.touched "
+            class=" text-danger p-0 m-0 fw-bold ">
+            {{ !generalForm.get('name')?.value ?
             'Name is Required' : '' }}
           </span>
-          <span *ngIf=" form.get('name')?.valid || form.get('name')?.untouched " class=" text-danger p-0 m-0 fw-bold ">
+          <span *ngIf=" generalForm.get('name')?.valid || generalForm.get('name')?.untouched "
+            class=" text-danger p-0 m-0 fw-bold ">
             &nbsp;
           </span>
         </div>
@@ -26,12 +25,12 @@
         <div class="col-xxl-6 col-12">
           <label for="phone">Phone Number:</label>
           <input type="tel" id="phone" class="form-control" name="phone" formControlName="phone">
-          <span *ngIf="form.get('phone')?.invalid && form.get('phone')?.touched  "
+          <span *ngIf="generalForm.get('phone')?.invalid && generalForm.get('phone')?.touched  "
             class=" text-danger p-0 m-0 fw-bold ">
-            {{ !form.get('phone')?.value ?
+            {{ !generalForm.get('phone')?.value ?
             'Phone is Required' : 'Phone is invalid' }}
           </span>
-          <span *ngIf=" form.get('phone')?.valid || form.get('phone')?.untouched "
+          <span *ngIf=" generalForm.get('phone')?.valid || generalForm.get('phone')?.untouched "
             class=" text-danger p-0 m-0 fw-bold ">
             &nbsp;
           </span>
@@ -41,24 +40,104 @@
         <div class="col-xxl-6 col-12">
           <label for="email">E-Mail(Optional):</label>
           <input type="email" id="email" class="form-control" name="email" formControlName="email">
-          <span *ngIf="form.get('email')?.invalid && form.get('email')?.touched  "
+          <span *ngIf="generalForm.get('email')?.invalid && generalForm.get('email')?.touched  "
             class=" text-danger p-0 m-0 fw-bold ">
             {{ 'Email is invalid' }}
           </span>
-          <span *ngIf=" form.get('phone')?.valid || form.get('phone')?.untouched "
+          <span *ngIf=" generalForm.get('phone')?.valid || generalForm.get('phone')?.untouched "
             class=" text-danger p-0 m-0 fw-bold ">
             &nbsp;
           </span>
+        </div>
+        <div class="col-xxl-6 col-12 text-end">
+          <a class="pt-4" (click)="onChangePassword()">Change Your Password?</a>
+          <app-error [message]="errorMessage"></app-error>
           <div class="form-group mt-4 text-center ">
-            <button class="btn btn-primary px-5 contact-us__btn" type="submit" [disabled]="!form.valid">
+            <button class="btn btn-primary px-5 contact-us__btn" type="submit" [disabled]="!generalForm.valid">
               Save Changes
             </button>
           </div>
         </div>
-
-
-
       </form>
     </div>
   </div>
 </section>
+
+<!--
+-----------------------------------------------------
+Modal
+----------------------------------------------------- -->
+
+<ng-template #modal let-modal>
+  <div class="modal-header px-6 pb-0 pt-5 ">
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+
+  </div>
+  <div class="modal-body  mt-5  px-6 pb-5">
+    <div class="row mb-3">
+      <div class="col-12">
+        <h4 class="modal-title" id="modal-basic-title">Change Password</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 ">
+        <form (ngSubmit)="onSavePassword()" [formGroup]="passwordForm">
+          <div class="row">
+            <div class="col-12">
+              <label for="currentPassword">Current Password:</label>
+              <input type="password" id="currentPassword" class="form-control " name="currentPassword"
+                formControlName="currentPassword">
+              <span
+                *ngIf="passwordForm.get('currentPassword')?.invalid && passwordForm.get('currentPassword')?.touched; else empty  "
+                class=" text-danger p-0 m-0 fw-bold ">
+                {{ !passwordForm.get('currentPassword')?.value ?
+                'currentPassword is Required' : 'Password Must Be At Least 6 Characters' }}
+              </span>
+
+            </div>
+
+            <div class="col-12 my-2">
+              <label for="newPassword">New Password:</label>
+              <input type="password" id="newPassword" class="form-control " name="newPassword"
+                formControlName="newPassword">
+              <span
+                *ngIf="passwordForm.get('newPassword')?.invalid && passwordForm.get('newPassword')?.touched; else empty  "
+                class=" text-danger p-0 m-0 fw-bold ">
+                {{ !passwordForm.get('newPassword')?.value ?
+                'newPassword is Required' : 'Password Must Be At Least 6 Characters' }}
+              </span>
+            </div>
+
+
+            <div class="col-12 my-2">
+              <label for="confirmPassword">Confirm Password:</label>
+              <input type="password" id="confirmPassword" class="form-control " name="confirmPassword"
+                formControlName="confirmPassword">
+              <span
+                *ngIf="passwordForm.get('confirmPassword')?.invalid && passwordForm.get('confirmPassword')?.touched; else empty  "
+                class=" text-danger p-0 m-0 fw-bold ">
+                {{ !passwordForm.get('confirmPassword')?.value ?
+                'confirmPassword is Required' : 'Password did not match ' }}
+              </span>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-12 my-2 text-center ">
+              <app-error [message]="errorMessage"></app-error>
+              <button class="btn btn-primary px-5 my-5" type="submit" [disabled]="!passwordForm.valid">
+                Save Changes
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+</ng-template>
+<ng-template #empty>
+  &nbsp;
+</ng-template>

@@ -1,4 +1,4 @@
-<div class=" auth">
+<div class=" container-fluid-no-padding">
   <div class="row">
     <div class="col-md-6 col-12 d-flex flex-column justify-content-center p-5 h--100vh ">
       <h1 class=" heading-1 mb-5 text-center">
@@ -6,7 +6,7 @@
       </h1>
       <form (ngSubmit)="onSubmit()" [formGroup]="form">
 
-        <div class="row justify-content-center mb-1">
+        <div class="row justify-content-center mb-2">
           <div class="col-xxl-8 col-md-10 col-sm-8 col-12">
             <div class="d-flex  " #otp>
               <input type="text" id="otp1" class="form-control" name="otp1" maxlength="1" formControlName="otp1"
@@ -17,13 +17,13 @@
                 class="otp-input" (keyup)="onDigitInput($event)">
               <input type=" text" id="otp4" class="form-control" name="otp4" maxlength="1" formControlName="otp4"
                 class="otp-input" (keyup)="onDigitInput($event)">
-              <span *ngIf=" response " class=" text-danger p-0 m-0 fw-bold ">
-                {{ response.detail }}
-              </span>
+
+
             </div>
             <span *ngIf=" !response " class=" text-danger p-0 m-0 fw-bold ">
               &nbsp;
             </span>
+            <app-error [message]="errorMessage"></app-error>
           </div>
         </div>
         <div class="row justify-content-center mb-1">

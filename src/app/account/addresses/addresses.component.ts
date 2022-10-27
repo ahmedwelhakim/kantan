@@ -28,6 +28,7 @@ export class AddressesComponent implements OnInit, OnDestroy {
   addressSub!: Subscription;
   isLoading = true;
   isEditing = false;
+  errorMessage = '';
   @ViewChild('modal') modal!: ElementRef;
 
   ngOnInit(): void {
@@ -40,6 +41,7 @@ export class AddressesComponent implements OnInit, OnDestroy {
       next: () => (this.isLoading = false),
       error: (err) => {
         this.isLoading = false;
+
         console.log(err);
       },
     });
@@ -69,16 +71,25 @@ export class AddressesComponent implements OnInit, OnDestroy {
 
   onSubmitAddress() {
     if (this.isEditing && this.editAddress) {
-      this.addressService
-        .submitEditAddress(this.editAddress)
-        .subscribe({ error: (err) => console.log(err) });
+      this.addressService.submitEditAddress(this.editAddress).subscribe({
+        next: () => {
+          this.modalService.dismissAll();
+        },
+        error: (err) => {
+          this.errorMessage = err.message;
+        },
+      });
     }
     if (!this.isEditing) {
-      this.addressService
-        .submitNewAddress()
-        .subscribe({ error: (err) => console.log(err) });
+      this.addressService.submitNewAddress().subscribe({
+        next: () => {
+          this.modalService.dismissAll();
+        },
+        error: (err) => {
+          this.errorMessage = err.message;
+        },
+      });
     }
-    this.modalService.dismissAll();
   }
 
   private openModal() {

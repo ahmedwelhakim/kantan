@@ -40,11 +40,15 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="mb-4 fs-5" *ngIf="addresses.length===0 && !isLoading">
+    No Addresses Here
+  </div>
+  <div *ngIf="!isLoading" class="row">
     <div class="col-12">
       <a class="link fs-5 mt-2" (click)="onCreateAddress()">Add new address</a>
     </div>
   </div>
+
 </div>
 
 
@@ -173,6 +177,7 @@ Modal
 
           <div class="row">
             <div class="col-12 text-center ">
+              <app-error [message]="errorMessage"></app-error>
               <button class="btn btn-primary px-5 my-5" type="submit" [disabled]="!form.valid">
                 Save Changes
               </button>

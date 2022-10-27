@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   NgbOffcanvas,
   OffcanvasDismissReasons,
@@ -17,7 +18,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private offcanvasService: NgbOffcanvas,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
   isCollapsed = false;
   user: User | null = null;
@@ -47,6 +49,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
       );
   }
 
+  onLogout() {
+    this.offcanvasService.dismiss();
+    this.authService.logout();
+    this.router.navigate(['/']);
+  }
   private getDismissReason(reason: any): string {
     if (reason === OffcanvasDismissReasons.ESC) {
       return 'by pressing ESC';

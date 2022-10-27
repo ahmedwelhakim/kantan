@@ -16,9 +16,12 @@ import { LogInComponent } from './auth/log-in/log-in.component';
 import { SendOtpComponent } from './auth/send-otp/send-otp.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { ErrorComponent } from './errors/error/error.component';
+import { HttpErrorInterceptor } from './errors/http-error.interceptor';
 import { PageNotFoundComponent } from './errors/page-not-found/page-not-found.component';
-import { LoaderComponent } from './shared/loader/loader.component';
 import { HeaderComponent } from './header/header.component';
+import { LoaderComponent } from './shared/loader/loader.component';
+import { ToastComponent } from './shared/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,8 @@ import { HeaderComponent } from './header/header.component';
     PageNotFoundComponent,
     LoaderComponent,
     HeaderComponent,
+    ErrorComponent,
+    ToastComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +51,11 @@ import { HeaderComponent } from './header/header.component';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

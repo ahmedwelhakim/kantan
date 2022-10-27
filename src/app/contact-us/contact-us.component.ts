@@ -15,7 +15,7 @@ export class ContactUsComponent implements OnInit {
   url: string;
   constructor(private httpService: HttpService) {
     this.apiUrl = environment.apiUrl;
-    this.url = environment.apiUrl + '/api/contact-us/';
+    this.url = '/api/contact-us/';
   }
   form!: FormGroup;
   response: ContactRes | null = null;

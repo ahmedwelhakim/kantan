@@ -17,6 +17,7 @@ export class LogInComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
   form!: FormGroup;
+  errorMessage = '';
   ngOnInit(): void {
     this.initForm();
   }
@@ -34,10 +35,10 @@ export class LogInComponent implements OnInit {
     });
   }
   onSubmit() {
-    if (!this.form.valid) return;
+    //if (!this.form.valid) return;
     this.authService.login(this.form.value).subscribe({
       error: (err: HttpErrorResponse) => {
-        console.log(err.name);
+        this.errorMessage = err.message;
       },
       next: (res) => this.router.navigate(['/']),
     });

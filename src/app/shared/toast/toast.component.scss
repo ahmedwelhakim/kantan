@@ -1,0 +1,15 @@
+.toast {
+  z-index: 100000;
+  background-color: white;
+  text-align: center;
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  &__message {
+    margin: 0;
+    padding: 1rem 2rem;
+    display: inline-block;
+    width: max-content;
+  }
+}

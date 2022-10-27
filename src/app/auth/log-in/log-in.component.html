@@ -1,6 +1,6 @@
-<div class="auth">
-  <div class="row">
-    <div class="col-md-6 col-12 d-flex flex-column justify-content-center p-5 h--100vh ">
+<div class="container-fluid-no-padding">
+  <div class="row ">
+    <div class="col-md-6 col-12 d-flex flex-column justify-content-center p-5  h--100vh">
       <h1 class=" heading-1 mb-5 text-center">
         Log in
       </h1>
@@ -41,6 +41,7 @@
               </a>
 
             </div>
+            <app-error [message]="errorMessage"></app-error>
             <div class="d-flex justify-content-center mt-4">
               <button class="btn btn-primary px-6 py-2 contact-us__btn" type="submit" [disabled]="!form.valid">
                 Log in
@@ -58,7 +59,7 @@
         Do you have account? <a routerLink="/auth/sign-up">sign up</a>
       </div>
     </div>
-    <div class="col-md-6 col-12 bg-img text-white text-center flex-column justify-content-center d-none d-md-flex ">
+    <div class="col-md-6 col-12  bg-img text-white text-center flex-column justify-content-center d-none d-md-flex ">
       <h1 class="heading-1">
         Welcome Back
       </h1>
